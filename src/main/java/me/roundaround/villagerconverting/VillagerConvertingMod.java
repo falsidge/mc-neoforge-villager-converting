@@ -1,13 +1,20 @@
 package me.roundaround.villagerconverting;
+import org.slf4j.Logger;
 
-import me.roundaround.villagerconverting.config.VillagerConvertingConfig;
-import net.fabricmc.api.ModInitializer;
+import com.mojang.logging.LogUtils;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 
-public final class VillagerConvertingMod implements ModInitializer {
-  public static final String MOD_ID = "villagerconverting";
+@Mod(VillagerConvertingMod.MODID)
+public class VillagerConvertingMod
+{
+    public static final String MODID = "villagerconverting";
+    private static final Logger LOGGER = LogUtils.getLogger();
 
-  @Override
-  public void onInitialize() {
-    VillagerConvertingConfig.getInstance().init();
-  }
+    public VillagerConvertingMod(IEventBus modEventBus, ModContainer modContainer)
+    {
+        modContainer.registerConfig(ModConfig.Type.COMMON, VillagerConvertingConfig.SPEC);
+    }
 }
